@@ -53,3 +53,7 @@ args = "cd user-panel && PORT=5002 npm run dev"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd vendor-panel && PORT=5003 npm run dev"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
