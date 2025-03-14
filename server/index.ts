@@ -9,7 +9,7 @@ import { authRoutes } from './routes/auth';
 import { authMiddleware } from './middleware/auth';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+import { env } from './config/env';
 
 app.use(cors());
 app.use(express.json());
@@ -28,8 +28,8 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   res.status(500).json({ message: 'Something went wrong!' });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(parseInt(env.PORT), '0.0.0.0', () => {
+  console.log(`Server running on port ${env.PORT} in ${env.NODE_ENV} mode`);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
