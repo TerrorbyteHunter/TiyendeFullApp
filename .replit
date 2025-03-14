@@ -8,7 +8,7 @@ channel = "stable-24_05"
 run = ["sh", "-c", "npm run dev"]
 
 [workflows]
-runButton = "Run All Panels"
+runButton = "Run Admin Panel"
 
 [[workflows.workflow]]
 name = "Run Admin Panel"
@@ -17,7 +17,7 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd admin-panel && npm run dev"
+args = "cd admin-panel && PORT=5001 npm run dev"
 
 [[workflows.workflow]]
 name = "Run User Panel"
@@ -57,3 +57,11 @@ args = "cd vendor-panel && PORT=5003 npm run dev"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 3000
+
+[[ports]]
+localPort = 5003
+externalPort = 3001
