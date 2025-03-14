@@ -19,6 +19,35 @@ import { SessionTimeout } from "@/components/shared/session-timeout";
 import Management from "@/pages/management";
 import Users from "@/pages/users"; // Added import
 
+function ErrorBoundary({ children }: { children: React.ReactNode }) {
+  const [hasError, setHasError] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const errorHandler = (error: Error) => {
+      setHasError(true);
+      setError(error);
+    }
+
+    window.addEventListener('error', errorHandler);
+
+    return () => {
+      window.removeEventListener('error', errorHandler);
+    }
+  }, []);
+
+  if (hasError) {
+    return (
+      <div>
+        <h1>Something went wrong!</h1>
+        <pre>{error.message}</pre>
+      </div>
+    );
+  }
+
+  return children;
+}
+
 
 function ProtectedRoute({ component: Component, ...rest }: { component: React.ComponentType<any>, [key: string]: any }) {
   const { isAuthenticated, isLoading } = useAuth();
@@ -98,14 +127,16 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <AppLayout>
-          <Router />
-        </AppLayout>
-        <Toaster />
-      </AuthProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <AppLayout>
+            <Router />
+          </AppLayout>
+          <Toaster />
+        </AuthProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 
