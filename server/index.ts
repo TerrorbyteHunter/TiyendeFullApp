@@ -4,6 +4,7 @@ import cors from 'cors';
 import { adminRoutes } from './routes/admin';
 import { userRoutes } from './routes/user';
 import { vendorRoutes } from './routes/vendor';
+import { authRoutes } from './routes/auth';
 import { authMiddleware } from './middleware/auth';
 
 const app = express();
