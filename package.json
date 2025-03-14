@@ -11,6 +11,9 @@
   "description": "",
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.9",
-    "jsonwebtoken": "^9.0.2"
+    "@types/pg": "^8.11.11",
+    "drizzle-orm": "^0.40.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.14.0"
   }
 }
