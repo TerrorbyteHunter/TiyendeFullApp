@@ -1,6 +1,7 @@
 
 import express from 'express';
 import cors from 'cors';
+import { apiLimiter, authLimiter } from './middleware/rate-limit';
 import { adminRoutes } from './routes/admin';
 import { userRoutes } from './routes/user';
 import { vendorRoutes } from './routes/vendor';
@@ -13,11 +14,11 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Auth routes (public)
-app.use('/api/auth', authRoutes);
+// Auth routes (public) with strict rate limiting
+app.use('/api/auth', authLimiter, authRoutes);
 
-// Protected routes
-app.use('/api/admin', authMiddleware, adminRoutes);
+// Protected routes with general API rate limiting
+app.use('/api/admin', apiLimiter, authMiddleware, adminRoutes);
 app.use('/api/user', authMiddleware, userRoutes);
 app.use('/api/vendor', authMiddleware, vendorRoutes);
 
