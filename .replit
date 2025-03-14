@@ -6,3 +6,23 @@ channel = "stable-24_05"
 
 [deployment]
 run = ["sh", "-c", "npm run dev"]
+
+[workflows]
+
+[[workflows.workflow]]
+name = "Run Admin Panel"
+author = 40510402
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd admin-panel && npm run dev"
+
+[[workflows.workflow]]
+name = "Run User Panel"
+author = 40510402
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd user-panel && npm run dev"
