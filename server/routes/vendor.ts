@@ -1,14 +1,14 @@
+
 import { Router } from 'express';
-import { getDashboard, getRoutes, createRoute, updateRoute, getBookings } from '../controllers/vendor';
+import { insertVendorSchema } from '@shared/schema';
 import { validateRequest } from '../middleware/validate';
-import { createRouteSchema, updateRouteSchema } from '@shared/schema'; // Assuming these schemas exist
+import { createVendor, getVendors, updateVendor, deleteVendor } from '../controllers/vendor';
 
 const router = Router();
 
-router.get('/dashboard', getDashboard);
-router.get('/routes', getRoutes);
-router.post('/routes', validateRequest(createRouteSchema), createRoute); // Added validation middleware
-router.put('/routes/:id', validateRequest(updateRouteSchema), updateRoute); // Added validation middleware
-router.get('/bookings', getBookings);
+router.get('/', getVendors);
+router.post('/', validateRequest(insertVendorSchema), createVendor);
+router.put('/:id', validateRequest(insertVendorSchema), updateVendor);
+router.delete('/:id', deleteVendor);
 
-export const vendorRoutes = router;
+export default router;
