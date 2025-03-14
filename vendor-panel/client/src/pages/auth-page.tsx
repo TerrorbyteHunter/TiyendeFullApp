@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Bus } from "lucide-react";
+import { useEffect } from "react";
 
 const loginSchema = z.object({
   username: z.string().min(1, "Username is required"),
@@ -26,12 +27,6 @@ export default function AuthPage() {
   const { vendor, loginMutation } = useAuth();
   const [, navigate] = useLocation();
 
-  // Redirect if already logged in
-  if (vendor) {
-    navigate("/");
-    return null;
-  }
-
   // Login form with default credentials for demo
   const loginForm = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -43,8 +38,22 @@ export default function AuthPage() {
 
   // Handle login form submission
   const onLoginSubmit = (data: LoginFormValues) => {
-    loginMutation.mutate(data);
+    loginMutation.mutate(data, {
+      onSuccess: () => {
+        navigate("/");
+      },
+      onError: (error) => {
+        console.error("Login failed:", error);
+        // Add error handling, e.g., display an error message
+      }
+    });
   };
+
+  useEffect(() => {
+    if (vendor) {
+      navigate("/");
+    }
+  }, [vendor, navigate]);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">

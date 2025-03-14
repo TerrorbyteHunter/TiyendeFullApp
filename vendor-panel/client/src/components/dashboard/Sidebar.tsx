@@ -26,7 +26,7 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, toggleSidebar, currentPath }: SidebarProps) {
   const { vendor, logoutMutation } = useAuth();
-  
+
   const handleLogout = () => {
     logoutMutation.mutate();
   };
@@ -53,7 +53,7 @@ export function Sidebar({ isOpen, toggleSidebar, currentPath }: SidebarProps) {
           <X className="h-6 w-6" />
         </Button>
       </div>
-      
+
       <div className="px-4 py-2">
         <div className="bg-gray-800 rounded-lg p-3 flex items-center space-x-3">
           <Avatar>
@@ -66,7 +66,7 @@ export function Sidebar({ isOpen, toggleSidebar, currentPath }: SidebarProps) {
           </div>
         </div>
       </div>
-      
+
       <ScrollArea className="flex-1 overflow-y-auto">
         <nav className="mt-4">
           <div className="px-4 py-2">
@@ -104,7 +104,7 @@ export function Sidebar({ isOpen, toggleSidebar, currentPath }: SidebarProps) {
               />
             </ul>
           </div>
-          
+
           <div className="px-4 py-2 mt-4">
             <h2 className="text-xs uppercase tracking-wider text-gray-400 font-semibold">Account</h2>
             <ul className="mt-2 space-y-1">
@@ -130,7 +130,7 @@ export function Sidebar({ isOpen, toggleSidebar, currentPath }: SidebarProps) {
           </div>
         </nav>
       </ScrollArea>
-      
+
       <div className="p-4 border-t border-gray-700">
         <button
           onClick={handleLogout}
