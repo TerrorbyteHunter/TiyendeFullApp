@@ -8,6 +8,7 @@ channel = "stable-24_05"
 run = ["sh", "-c", "npm run dev"]
 
 [workflows]
+runButton = "Run All Panels"
 
 [[workflows.workflow]]
 name = "Run Admin Panel"
@@ -26,3 +27,29 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd user-panel && npm run dev"
+
+[[workflows.workflow]]
+name = "Run Vendor Panel"
+author = 40510402
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd vendor-panel && npm run dev"
+
+[[workflows.workflow]]
+name = "Run All Panels"
+author = 40510402
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd admin-panel && PORT=5001 npm run dev"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd user-panel && PORT=5002 npm run dev"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd vendor-panel && PORT=5003 npm run dev"
