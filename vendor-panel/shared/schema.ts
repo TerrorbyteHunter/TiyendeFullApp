@@ -138,3 +138,11 @@ export type DashboardStats = {
     bookings: number;
   };
 };
+
+export const insertBusRouteSchema = z.object({
+  name: z.string().min(3).max(100),
+  stops: z.array(z.string()).min(2, "Route must have at least 2 stops"),
+  price: z.number().positive("Price must be positive").min(1),
+  departureTime: z.string().datetime(),
+  capacity: z.number().int().positive(),
+});

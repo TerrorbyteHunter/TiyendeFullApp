@@ -19,7 +19,7 @@ app.use('/api/auth', authLimiter, authRoutes);
 
 // Protected routes with general API rate limiting
 app.use('/api/admin', apiLimiter, authMiddleware, adminRoutes);
-app.use('/api/user', authMiddleware, userRoutes);
+app.use('/api/user', apiLimiter, authMiddleware, userRoutes);
 app.use('/api/vendor', authMiddleware, vendorRoutes);
 
 // Global error handler

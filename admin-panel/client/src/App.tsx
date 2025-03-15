@@ -49,7 +49,12 @@ function ErrorBoundary({ children }: { children: React.ReactNode }) {
 }
 
 
-function ProtectedRoute({ component: Component, ...rest }: { component: React.ComponentType<any>, [key: string]: any }) {
+interface ProtectedRouteProps {
+  component: React.ComponentType<any>;
+  [key: string]: any;
+}
+
+function ProtectedRoute({ component: Component, ...rest }: ProtectedRouteProps) {
   const { isAuthenticated, isLoading } = useAuth();
   const [, setLocation] = useLocation();
 
