@@ -8,7 +8,7 @@ channel = "stable-24_05"
 run = ["sh", "-c", "npm run dev"]
 
 [workflows]
-runButton = "Run Server"
+runButton = "Build and Run All"
 
 [[workflows.workflow]]
 name = "Run Admin Panel"
@@ -62,6 +62,27 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd server && npm run dev"
+
+[[workflows.workflow]]
+name = "Build and Run All"
+author = 40556038
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd admin-panel && npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd ../user-panel && npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd ../vendor-panel && npm run build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd ../server && npm run dev"
 
 [[ports]]
 localPort = 4000

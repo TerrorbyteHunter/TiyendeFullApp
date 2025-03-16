@@ -1,10 +1,10 @@
-
+import "dotenv/config"; // Load .env file
 import "tsconfig-paths/register";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
 if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL environment variable is not set');
+  throw new Error("DATABASE_URL environment variable is not set");
 }
 
 const pool = new Pool({
@@ -12,9 +12,9 @@ const pool = new Pool({
 });
 
 // Test the connection
-pool.query('SELECT NOW()', (err) => {
+pool.query("SELECT NOW()", (err) => {
   if (err) {
-    console.error('Database connection error:', err);
+    console.error("Database connection error:", err);
     process.exit(1);
   }
 });
