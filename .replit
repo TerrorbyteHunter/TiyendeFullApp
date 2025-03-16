@@ -8,7 +8,7 @@ channel = "stable-24_05"
 run = ["sh", "-c", "npm run dev"]
 
 [workflows]
-runButton = "Build and Run All"
+runButton = "Dev Environment"
 
 [[workflows.workflow]]
 name = "Run Admin Panel"
@@ -83,6 +83,27 @@ args = "cd ../vendor-panel && npm run build"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd ../server && npm run dev"
+
+[[workflows.workflow]]
+name = "Dev Environment"
+author = 40556038
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd admin-panel && npm run dev"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd user-panel && npm run dev "
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd vendor-panel && npm run dev"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd server && npm run dev"
 
 [[ports]]
 localPort = 4000
