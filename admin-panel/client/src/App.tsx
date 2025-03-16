@@ -32,6 +32,11 @@ function ErrorBoundary({ children }: { children: React.ReactNode }) {
     window.addEventListener('error', errorHandler);
 
     return () => {
+
+      <Route path="/">
+        <ProtectedRoute component={Dashboard} />
+      </Route>
+
       window.removeEventListener('error', errorHandler);
     }
   }, []);
@@ -104,9 +109,6 @@ function Router() {
     <Switch>
       <Route path="/login" component={Login} />
       <Route path="/auth" component={Login} />
-      <Route path="/">
-        <ProtectedRoute component={Dashboard} />
-      </Route>
       <Route path="/vendors">
         <ProtectedRoute component={Vendors} />
       </Route>
