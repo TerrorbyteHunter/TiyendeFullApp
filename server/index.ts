@@ -13,6 +13,9 @@ import { env } from './config/env';
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('admin-panel/dist'));
+app.use(express.static('user-panel/dist'));
+app.use(express.static('vendor-panel/dist'));
 
 // Auth routes (public) with strict rate limiting
 app.use('/api/auth', authLimiter, authRoutes);
